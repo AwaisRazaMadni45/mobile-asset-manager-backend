@@ -21,8 +21,6 @@ jobs:
 
       - name: Dependencies install karein
         run: npm ci
-        working-directory: ./backend
 
       - name: Tests chalayein
         run: npm test
-        working-directory: ./backend
