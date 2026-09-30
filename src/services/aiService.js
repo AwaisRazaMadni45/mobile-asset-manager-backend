@@ -1,11 +1,15 @@
 const Groq = require('groq-sdk');
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
+let groq;
+const getClient = () => {
+  if (!groq) {
+    groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+  }
+  return groq;
+};
 
 const callAI = async (promptText) => {
-  const completion = await groq.chat.completions.create({
+  const completion = await getClient().chat.completions.create({
     messages: [{ role: 'user', content: promptText }],
     model: 'qwen/qwen3.8-27b',
   });
